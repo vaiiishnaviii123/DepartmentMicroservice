@@ -76,18 +76,18 @@ def getDepartmentList():
 @login_required
 def getDepartmentEmployees(departmentId):
     params = {'departmentId': departmentId}
-    response = requests.get('http://127.0.0.1:5000//peoplesuite/apis/employees', headers={'Accept': 'application/json'},
+    response = requests.get('http:/k8s-default-peoplesu-0d2fdee4d4-1488968214.us-east-1.elb.amazonaws.com//peoplesuite/apis/employees', headers={'Accept': 'application/json'},
                             params=params)
     print(f"Status Code: {response.status_code}, Content: {response.json()}")
     return response.json()
 
 
-@app.route("/")
+@app.route("/peoplesuite/apis/department/servicem")
 def hello_department_service():
     return "<p> Welcome to department microservice</p>"
 
 
-@app.route("/health")
+@app.route("/peoplesuite/apis/department/health")
 def health():
     return jsonify(
         status="Department service UP and running"
@@ -95,4 +95,4 @@ def health():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(debug=True, host='0.0.0.0', port=5001)

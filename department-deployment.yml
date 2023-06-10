@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: department-deployment
+  labels:
+    app: department-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: department-app
+  template:
+    metadata:
+      labels:
+        app: department-app
+    spec:
+      containers:
+      - name: department-app
+        image: vaishnavivnk/department-microservice:latest
+        ports:
+          - containerPort: 5000
